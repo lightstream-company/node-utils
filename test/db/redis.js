@@ -1,5 +1,8 @@
-const {expect} = require('chai');
-const {createClient} = require('../../db/redis');
+const chai = require('chai');
+const redis = require('../../db/redis');
+
+const createClient = redis.createClient;
+const expect = chai.expect;
 
 describe('integrated', () => {
   describe('redis', () => {
