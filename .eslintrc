@@ -1,0 +1,6 @@
+{
+  "extends": "lightstream",
+  "env": {
+    "es6": true
+  }
+}

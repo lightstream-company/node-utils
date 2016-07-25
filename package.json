@@ -1,0 +1,29 @@
+{
+  "name": "node-utils",
+  "version": "1.0.0",
+  "description": "Internal node utils",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test/ --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lightstream-company/node-utils.git"
+  },
+  "author": "Lightstream Company",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lightstream-company/node-utils/issues"
+  },
+  "homepage": "https://github.com/lightstream-company/node-utils#readme",
+  "dependencies": {
+    "redis": "^2.6.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3"
+  }
+}
