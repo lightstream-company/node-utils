@@ -10,16 +10,7 @@ describe('integrated', () => {
         expect(createClient).to.be.a('function');
       });
 
-      it('should connect to redis', (done) => {
-        const client = createClient();
-        client.info((error, infos) => {
-          expect(infos).to.have.length.above(1);
-          done();
-        });
-      });
-
-      it.skip('should connect to another database with custom env', (done) => {
-        process.env.REDIS_HOST = 'redis';
+      it.skip('should connect to database with custom env', (done) => {
         const client = createClient();
         client.info((error, infos) => {
           expect(infos).to.have.length.above(1);
