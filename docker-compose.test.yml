@@ -8,6 +8,7 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - redis
+      - unstable-redis
 
   sut-v4:
     build:
@@ -15,8 +16,13 @@ services:
       dockerfile: Dockerfile-v4
     depends_on:
       - redis
+      - unstable-redis
 
   redis:
     image: redis:3.2
+
+  unstable-redis:
+    build:
+      context: ./unstable-redis/
 
 
