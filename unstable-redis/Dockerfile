@@ -1,4 +1,4 @@
-FROM redis
+FROM redis:3.2
 
 
 COPY ./script.sh /tmp/script.sh

@@ -1,10 +1,24 @@
 const redis = require('redis');
 
+
+function retry(options) {
+  console.log('REDIS CONNECTION LOST');
+  console.log(options);
+  if (options.total_retry_time > 1000 * 60 * 5) {
+    return new Error('Retry time exhausted');
+  }
+  if (options.times_connected > 10) {
+    return;
+  }
+  return Math.max(options.attempt * 100, 3000);
+}
+
 function getConfig(config) {
-  return Object.assign({}, config || {}, {
+  return Object.assign({}, {
     host: process.env.REDIS_HOST,
-    port: process.env.REDIS_PORT
-  });
+    port: process.env.REDIS_PORT,
+    retry_strategy: retry
+  }, config);
 }
 
 function createClient(config) {
