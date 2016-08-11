@@ -28,5 +28,6 @@ function createClient(config) {
 
 module.exports = {
   createClient: createClient,
-  getConfig: getConfig
+  getConfig: getConfig,
+  retryStrategy: retry
 };
