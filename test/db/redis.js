@@ -1,4 +1,6 @@
 const chai = require('chai');
+const chai_as_promised = require('chai-as-promised');
+chai.use(chai_as_promised);
 const redis = require('../../db/redis');
 
 const createClient = redis.createClient;
@@ -19,6 +21,15 @@ describe('integrated', () => {
           expect(infos).to.have.length.above(1);
           done();
         });
+      });
+
+      it('should have a promise oriented api', () => {
+        const client = createClient();
+        return expect(client.infoAsync())
+            .to.have.been.fulfilled
+            .and.then(infos => {
+              expect(infos).to.have.length.above(1);
+            });
       });
 
       //this is just a nightmare to automate this kind of test

@@ -23,6 +23,8 @@
   },
   "homepage": "https://github.com/lightstream-company/node-utils#readme",
   "dependencies": {
+    "bluebird": "^3.4.1",
+    "chai-as-promised": "^5.3.0",
     "redis": "^2.6.2"
   },
   "devDependencies": {
