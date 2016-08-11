@@ -6,7 +6,7 @@ Internal utils library
 Assuming your have read access to the repos
 
 ```
-npm install --save git+ssh://git@github.com:lightstream-company/node-utils.git
+npm install --save github:lightstream-company/node-utils.git
 
 ```
 
