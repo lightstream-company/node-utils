@@ -1,5 +1,6 @@
 const redis = require('redis');
-
+const bluebird = require('bluebird');
+bluebird.promisifyAll(redis.RedisClient.prototype);
 
 function retry(options) {
   console.log('REDIS CONNECTION LOST');
@@ -27,5 +28,6 @@ function createClient(config) {
 
 module.exports = {
   createClient: createClient,
-  getConfig: getConfig
+  getConfig: getConfig,
+  retryStrategy: retry
 };
