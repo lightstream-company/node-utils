@@ -3,8 +3,6 @@ Internal utils library
 
 ## Install
 
-Assuming your have read access to the repos
-
 ```
 npm install --save github:lightstream-company/node-utils.git
 
