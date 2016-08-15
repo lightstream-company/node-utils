@@ -26,16 +26,27 @@ describe('integrated', () => {
       it('should have a promise oriented api', () => {
         const client = createClient();
         return expect(client.infoAsync())
-            .to.have.been.fulfilled
-            .and.then(infos => {
-              expect(infos).to.have.length.above(1);
-            });
+          .to.have.been.fulfilled
+          .and.then(infos => {
+          expect(infos).to.have.length.above(1);
+        });
+      });
+
+      it('should have a promise oriented api for mutli', () => {
+        const client = createClient();
+        const multi = client.multi();
+        multi.set('something', 42);
+        multi.get('something');
+        return multi.execAsync().then((results) =>{
+          expect(results[0]).to.be.equal('OK');
+          expect(results[1]).to.be.equal('42');
+        });
       });
 
       //this is just a nightmare to automate this kind of test
       it.skip('should connect, disconnect, then reconnect', (done) => {
         const client = createClient({
-          host:'unstable-redis'
+          host: 'unstable-redis'
         });
         client.info((error, infos) => {
           expect(infos).to.have.length.above(1);
