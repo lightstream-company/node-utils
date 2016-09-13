@@ -64,5 +64,5 @@ function handleResponse(getError, fulfill, reject) {
 
 module.exports = {
   wait,
-  request: {get, post: preparePutOrPost('post'), put: preparePutOrPost('put'), del}
+  request: {get: get, post: preparePutOrPost('post'), put: preparePutOrPost('put'), del}
 };

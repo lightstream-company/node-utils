@@ -1,6 +1,6 @@
 {
   "name": "lightstream-node-utils",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Lightstream internal node utils",
   "main": "index.js",
   "directories": {
