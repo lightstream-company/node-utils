@@ -8,16 +8,18 @@ function wait(delay) {
   });
 }
 
-function get(url) {
+function get(url, options) {
   return new Promise((fulfill, reject) => {
     function getError(response, body) {
       return new Error(`Error while fetching from url "${url}". status code : ${response.statusCode}. message : ${body}`);
     }
 
-    return request.get({
+    const parameters = Object.assign({
       url,
       json: true
-    }, handleResponse(getError, fulfill, reject));
+    }, options);
+
+    return request.get(parameters, handleResponse(getError, fulfill, reject));
   });
 }
 
@@ -32,7 +34,7 @@ function preparePutOrPost(verb) {
         url,
         body: payload,
         json: true
-      }, handleResponse(getError, fulfill, reject))
+      }, handleResponse(getError, fulfill, reject));
     });
   };
 }
@@ -46,7 +48,7 @@ function del(url) {
     return request.del({
       url,
       json: true
-    }, handleResponse(getError, fulfill, reject))
+    }, handleResponse(getError, fulfill, reject));
   });
 }
 
@@ -64,5 +66,10 @@ function handleResponse(getError, fulfill, reject) {
 
 module.exports = {
   wait,
-  request: {get: get, post: preparePutOrPost('post'), put: preparePutOrPost('put'), del}
+  request: {
+    get: get,
+    post: preparePutOrPost('post'),
+    put: preparePutOrPost('put'),
+    del
+  }
 };
