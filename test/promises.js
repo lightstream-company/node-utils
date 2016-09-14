@@ -9,7 +9,7 @@ chai.use(chai_as_promised);
 require('co-mocha');
 const nock = require('nock');
 
-const {wait, request:{get, post, put, del}} = require('../promises');
+const {wait, request: {get, post, put, del}} = require('../promises');
 
 describe('utils promised oriented functions behavior', () => {
 
@@ -33,10 +33,12 @@ describe('utils promised oriented functions behavior', () => {
     const url = host + '/path';
 
     describe('get calls', () => {
-      it('should parse body as JSON', function* () {
+      it('should parse body as JSON', function*() {
         nock(host)
           .get('/path')
-          .reply(200, {a:1});
+          .reply(200, {
+            a: 1
+          });
 
         const response = yield get(url);
 
@@ -54,10 +56,22 @@ describe('utils promised oriented functions behavior', () => {
 
         return get(url).should.have.been.rejectedWith(/while fetching from/);
       });
+
+      it('should override option', () => {
+        nock(host)
+          .get('/path?limit=5')
+          .reply(200);
+
+        return get(url, {
+          qs: {
+            limit: 5
+          }
+        });
+      });
     });
 
     describe('post calls', () => {
-      it('should post json and parse body as JSON', function* () {
+      it('should post json and parse body as JSON', function*() {
         nock(host)
           .filteringRequestBody(/.*/, '*')
           .post('/path', '*')
@@ -65,13 +79,17 @@ describe('utils promised oriented functions behavior', () => {
             return requestBody;
           });
 
-        const response = yield post(url, {b:2});
+        const response = yield post(url, {
+          b: 2
+        });
 
         response.b.should.equal(2);
       });
 
       it('should raise an error when error', () => {
-        return post(url, {b:2}).should.have.been.rejected;
+        return post(url, {
+          b: 2
+        }).should.have.been.rejected;
       });
 
       it('should raise an error when status code is not 2xx', () => {
@@ -80,12 +98,15 @@ describe('utils promised oriented functions behavior', () => {
           .post('/path', '*')
           .reply(502);
 
-        return post(url, {b:2}).should.have.been.rejectedWith(/while posting to/);
+        return post(url, {
+          b: 2
+        }).should.have.been.rejectedWith(/while posting to/);
       });
+
     });
 
     describe('put calls', () => {
-      it('should put json and parse body as JSON', function* () {
+      it('should put json and parse body as JSON', function*() {
         nock(host)
           .filteringRequestBody(/.*/, '*')
           .put('/path', '*')
@@ -93,13 +114,17 @@ describe('utils promised oriented functions behavior', () => {
             return requestBody;
           });
 
-        const response = yield put(url, {c:3});
+        const response = yield put(url, {
+          c: 3
+        });
 
         response.c.should.equal(3);
       });
 
       it('should raise an error when error', () => {
-        return put(url, {c:3}).should.have.been.rejected;
+        return put(url, {
+          c: 3
+        }).should.have.been.rejected;
       });
 
       it('should raise an error when status code is not 2xx', () => {
@@ -108,7 +133,9 @@ describe('utils promised oriented functions behavior', () => {
           .put('/path', '*')
           .reply(502);
 
-        return put(url, {c:3}).should.have.been.rejectedWith(/while puting to/);
+        return put(url, {
+          c: 3
+        }).should.have.been.rejectedWith(/while puting to/);
       });
     });
 
